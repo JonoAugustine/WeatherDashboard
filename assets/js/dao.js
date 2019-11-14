@@ -22,7 +22,10 @@ const weather = (city, country) => {
     return new Promise(resolve => resolve(JSON.parse(localStorage["w"])));
   } else {
     return query("weather", `q=${city}${country ? "," + country : ""}`).then(
-      r => (localStorage["w"] = JSON.stringify(r))
+      r => {
+        localStorage["w"] = JSON.stringify(r);
+        return r;
+      }
     );
   }
 };
