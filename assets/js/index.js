@@ -10,7 +10,35 @@ const filterForecast = forecast =>
     return f.date.getHours() === 12;
   });
 
-forecast("rockville", "us")
-  .then(filterForecast)
-  .then(fs => fs.map(f => ForecastCard(f)))
-  .then(fcs => show(fcs));
+const Dashboard = () => {
+  const base = Row(null, { height: "100%" });
+
+  // Seach
+  let searchPanel = SearchPanel();
+  const searchCol = Col(null, { width: "25%", padding: "0.5em" })
+    .addClass("col-search")
+    .append(searchPanel);
+
+  // Weather Detials
+  let weatherPanel = Row(null, { padding: "0.5em" }).addClass("centered");
+
+  const forecastPanel = Row(null, { padding: "0.5em" }).addClass("centered");
+
+  const weatherCol = Col(null, { "max-width": "100%", width: "70%" }).append(
+    weatherPanel,
+    forecastPanel
+  );
+
+  base.append(searchCol, weatherCol);
+
+  forecast("rockville", "us")
+    .then(filterForecast)
+    .then(fs => fs.map(f => ForecastCard(f)))
+    .then(fcs => forecastPanel.append(fcs));
+
+  weather("rockville", "us").then(r => weatherPanel.append(WeatherCard(r)));
+
+  return base;
+};
+
+show(Dashboard());

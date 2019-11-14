@@ -1,32 +1,43 @@
-const Row = (callback, css) => {
-  const n = neue("div").addClass("row");
-  if (css) n.css(css);
-  if (typeof callback === "function") callback(n);
-  return n;
+const Container = (className, callback, css) => {
+  const c = neue("div").addClass(className);
+  if (css) c.css(css);
+  if (typeof callback === "function") callback(c);
+  return c;
 };
 
-const Col = (callback, css) => {
-  const n = neue("div").addClass("col");
-  if (css) n.css(css);
-  if (typeof callback === "function") callback(n);
-  return n;
-};
+const Row = (callback, css) => Container("row", callback, css);
 
-const ForecastIcon = code =>
+const Col = (callback, css) => Container("col", callback, css);
+
+const Card = (callback, css) => Container("card", callback, css);
+
+const WeatherIcon = (code, size) =>
   neue("img")
-    .attr("src", iconSrc(code))
+    .attr("src", iconSrc(code, size))
     .addClass("weather-icon");
 
 const ForecastCard = forecast =>
-  neue("div")
-    .addClass("card forecast-card")
-    .css({
-      margin: "5px 1em"
-    })
+  Card()
+    .addClass("forecast-card")
     .append(
-      ForecastIcon(forecast.weather[0].icon),
-      Row(n => n.text(forecast.date.toLocaleDateString("en-US")), {
-          margin: '15px 0 20px 0'
-      }),
-      Row(n => n.text(`Temp: ${forecast.main.temp}C`))
+      WeatherIcon(forecast.weather[0].icon),
+      Row(n => n.text(forecast.date.toLocaleDateString("en-US"))),
+      Row(n => n.text(`Temp: ${forecast.main.temp}C`)),
+      Row(n => n.text(`Humidity: ${forecast.main.humidity}`))
     );
+
+const WeatherCard = weather =>
+  Card()
+    .addClass("weather-card")
+    .append(
+      WeatherIcon(weather.weather[0].icon, 2),
+      Row(n => n.text(new Date().toLocaleDateString("en-US"))),
+      Row(n => n.text(`Temp: ${weather.main.temp}C`)),
+      Row(n => n.text(`Humidity: ${weather.main.humidity}`))
+    );
+
+const SearchPanel = () => {
+  const search = searchHistory();
+  console.log(search);
+  return Card(null, { height: "100%" });
+};
