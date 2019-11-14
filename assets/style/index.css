@@ -1,0 +1,58 @@
+html,
+body,
+#root {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  color: white;
+  background-color: #333333;
+}
+
+header,
+footer {
+  padding: 0.5em;
+  text-align: center;
+  background-color: #3d404e;
+}
+
+header > h1,
+footer > a > h3 {
+  margin: 0;
+}
+
+footer > a {
+  color: white;
+  text-decoration: none;
+}
+
+footer > a:hover {
+  text-decoration: underline;
+}
+
+div.card {
+  position: relative;
+  padding: 0.5em 1em;
+  border: 1px solid lightblue;
+  border-radius: 10px;
+}
+
+.card.forecast-card {
+  height: 150px;
+}
+
+div.row {
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+div.col {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+img.weather-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
