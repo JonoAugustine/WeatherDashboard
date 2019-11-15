@@ -68,11 +68,11 @@ div.card {
   padding: 0.2em 0.5em;
   border: 1px solid lightblue;
   border-radius: 10px;
+  min-width: 120px;
 }
 
 div.card.forecast-card {
   width: 100%;
-  max-width: 200px;
 }
 
 div.card.forecast-card > .row {
@@ -98,5 +98,45 @@ img.weather-icon {
 }
 
 div.col.col-search {
-  height: 100%;
+  padding: "0.5em";
+  width: 25%;
+}
+
+@media only screen and (max-width: 450px) {
+  div.col.col-search {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div.row.row-search-history {
+    display: none;
+  }
+}
+
+input.input-search {
+  width: 50%;
+  margin: 0.5em;
+  border: none;
+  border-bottom: 1px solid lightblue;
+  color: white;
+  background-color: transparent;
+  text-align: center;
+}
+
+button.btn-search {
+  margin: 0.4em;
+  border: none;
+  border-bottom: 1px solid lightblue;
+  color: white;
+  background-color: transparent;
+}
+
+button.btn-search:hover {
+  background-color: darkcyan;
+}
+
+button.btn-search:active {
+  color: black;
+  background-color: cyan;
 }
