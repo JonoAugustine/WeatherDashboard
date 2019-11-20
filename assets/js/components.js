@@ -5,69 +5,97 @@ const Container = (className, callback, css) => {
   return c;
 };
 
-const Row = (callback, css) => Container("row", callback, css);
+const Row = (css, callback) => Container("row", callback, css);
 
-const Col = (callback, css) => Container("col", callback, css);
+const Col = (css, callback) => Container("col", callback, css);
 
-const Card = (callback, css) => Container("card", callback, css);
+const Card = (css, callback) => Container("card", callback, css);
 
-const WeatherIcon = (code, size) =>
-  neue("img")
+const WeatherIcon = (code, size) => {
+  return neue("img")
     .attr("src", iconSrc(code, size))
     .addClass("weather-icon");
+};
 
-const ForecastCard = forecast =>
-  Card()
+const ForecastCard = forecast => {
+  return Card()
     .addClass("forecast-card")
     .append(
       WeatherIcon(forecast.weather[0].icon),
-      Row(n => n.text(forecast.date.toLocaleDateString("en-US"))),
-      Row(n => n.text(`Temp: ${forecast.main.temp}C`)),
-      Row(n => n.text(`Humidity: ${forecast.main.humidity}%`))
+      Row(null, n => n.text(forecast.date.toLocaleDateString("en-US"))),
+      Row(null, n => n.text(`Temp: ${forecast.main.temp}C`)),
+      Row(null, n => n.text(`Humidity: ${forecast.main.humidity}%`))
     );
+};
 
-const WeatherCard = weather =>
-  Card()
+const WeatherCard = weather => {
+  return Card()
     .addClass("weather-card")
     .append(
-      WeatherIcon(weather.weather[0].icon, 2),
-      Row(n => n.text(new Date().toLocaleDateString("en-US"))),
-      Row(n => n.text(`Temp: ${weather.main.temp}C`)),
-      Row(n => n.text(`Humidity: ${weather.main.humidity}%`))
+      WeatherIcon(weather.weather[0].icon),
+      neue("h3")
+        .css({
+          "font-size": "1.5em",
+          "grid-area": "header"
+        })
+        .text(`${weather.name} (${new Date().toLocaleDateString("en-US")})`),
+      neue("p")
+        .css({
+          "grid-area": "temp"
+        })
+        .text(`Temp: ${weather.main.temp}C`),
+      neue("p")
+        .css({
+          "grid-area": "humid"
+        })
+        .text(`Humidity: ${weather.main.humidity}%`),
+      neue("p")
+        .css({ "grid-area": "wind" })
+        .text(`Wind Speed: ${weather.wind.speed}`)
     );
+};
 
 const SearchHistoryUnit = (text, setup) => {
-  const row = Row(null, { "text-align": "center", cursor: "pointer" });
+  const row = Row().addClass("history-unit");
   row.text(text);
-  row.click(() => {});
+  row.click(() => setup(text));
   return row;
 };
 
 const SearchPanel = setup => {
-  const panel = Card(null, { "min-height": "20%", "max-height": "100%" });
+  const panel = Card({ "min-height": "20%", "max-height": "100%" });
+  const searchRow = Row().addClass("centered");
+  const historyCol = Col().addClass("centered");
+
+  const updateSearchHistory = () => {
+    historyCol.empty();
+    getSearchHistory()
+      .map(t => SearchHistoryUnit(t, setup))
+      .forEach(u => historyCol.append(u));
+  };
 
   const input = neue("input")
     .attr("id", "search")
     .addClass("input-search");
+
   const searchBtn = neue("button")
     .text("Search")
     .addClass("btn-search")
     .click(() => {
       const t = $("#search")
         .val()
-        .trim();
-      if (t.length > 0) setup(t);
+        .trim()
+        .toLowerCase();
+      if (t.length > 0) {
+        setup(t);
+        updateSearchHistory();
+      }
     });
 
-  panel.append(
-    Row()
-      .addClass("centered")
-      .append(input)
-      .append(searchBtn)
-  );
+  searchRow.append(input, searchBtn);
+  panel.append(searchRow, historyCol);
 
-  const search = searchHistory();
-  search.map(t => SearchHistoryUnit(t, setup)).forEach(panel.append);
+  updateSearchHistory();
 
   return panel;
 };

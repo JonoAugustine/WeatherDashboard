@@ -11,12 +11,14 @@ const filterForecast = forecast =>
   });
 
 const Dashboard = () => {
-  const base = Row(null, { height: "100%" }).addClass("centered");
+  const base = Row({ height: "100%", paddingTop: "0.5em" }).addClass(
+    "centered"
+  );
 
   // Weather Detials
-  let weatherPanel = Row(null, { padding: "0.5em" }).addClass("centered");
+  let weatherPanel = Row({ padding: "0 0.5em" }).addClass("centered");
 
-  const forecastPanel = Row(null, {
+  const forecastPanel = Row({
     padding: "0.5em",
     "max-height": "60%",
     "overflow-y": "auto"
@@ -29,13 +31,10 @@ const Dashboard = () => {
       .then(WeatherCard)
       .then(c => weatherPanel.append(c));
     forecast(city, country)
-      .then(filterForecast)
+      .then(f => filterForecast(f))
       .then(fs => fs.map(ForecastCard))
       .then(fcs => forecastPanel.append(fcs));
-    searchHistory(city);
   };
-
-  setup("rockville"); // ! TODO remove test
 
   // Seach
   let searchPanel = SearchPanel(setup);
@@ -43,7 +42,7 @@ const Dashboard = () => {
     .addClass("col-search")
     .append(searchPanel);
 
-  const weatherCol = Col(null, { "max-width": "100%", width: "70%" }).append(
+  const weatherCol = Col({ "max-width": "100%", width: "70%" }).append(
     weatherPanel,
     forecastPanel
   );
