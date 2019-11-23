@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   const forecastPanel = Row({
     padding: "0.5em",
-    "max-height": "60%",
+    "max-height": "50%",
     "overflow-y": "auto"
   }).addClass("centered");
 

@@ -39,17 +39,17 @@ const WeatherCard = weather => {
           "grid-area": "header"
         })
         .text(`${weather.name} (${new Date().toLocaleDateString("en-US")})`),
-      neue("p")
+      neue("div")
         .css({
           "grid-area": "temp"
         })
         .text(`Temp: ${weather.main.temp}C`),
-      neue("p")
+      neue("div")
         .css({
           "grid-area": "humid"
         })
         .text(`Humidity: ${weather.main.humidity}%`),
-      neue("p")
+      neue("div")
         .css({ "grid-area": "wind" })
         .text(`Wind Speed: ${weather.wind.speed}`)
     );

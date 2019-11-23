@@ -67,10 +67,12 @@ const query = (type, queryString) =>
  */
 const weather = (city, country) => {
   return cacheEntry(city).weather
-    ? new Promise(res => res(cacheEntry(city).weather))
+    ? new Promise(res => {
+        res(cacheEntry(city).weather);
+      })
     : // If no cached data is found, make a request and encache
-      query("weather", `q=${city}${country ? "," + country : ""}`).then(r =>
-        cacheEntry(city, r)
+      query("weather", `q=${city}${country ? "," + country : ""}`).then(
+        r => cacheEntry(city, r).weather
       );
 };
 
@@ -84,8 +86,8 @@ const weather = (city, country) => {
 const forecast = (city, country) => {
   return cacheEntry(city).forecast
     ? new Promise(res => res(cacheEntry(city).forecast))
-    : query("forecast", `q=${city}${country ? "," + country : ""}`).then(r =>
-        cacheEntry(city, null, r)
+    : query("forecast", `q=${city}${country ? "," + country : ""}`).then(
+        r => cacheEntry(city, null, r).forecast
       );
 };
 
