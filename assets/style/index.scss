@@ -63,7 +63,7 @@ header {
     margin: auto 0;
     float: right;
 
-    @include desktop() {
+    @include tablet() {
       display: none;
     }
   }
@@ -85,10 +85,6 @@ footer {
     &:hover {
       text-decoration: underline;
     }
-
-    @include desktop() {
-      display: none;
-    }
   }
 }
 
@@ -97,6 +93,9 @@ footer {
   max-height: 80%;
 
   @include tablet() {
+    display: flex;
+    flex-direction: row;
+
     padding: $padding;
   }
 
@@ -108,21 +107,45 @@ footer {
 }
 
 #sidebar {
-  width: 0;
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(200%);
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(200%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  position: relative;
   max-width: 250px;
   height: 100%;
   margin: $margin * 2 auto;
+
   border-radius: $radius;
   background-color: rgba(lighten(color(base), 15%), 0.6);
-  transition: all 0.3s;
+  animation: slideUp 0.5s 1 0s ease-in;
+  animation-fill-mode: forwards;
+
+  @include tablet() {
+    margin: $margin * 2 0;
+  }
 
   @include desktop() {
     grid-area: sidebar;
   }
 
-  &.open {
-    width: 100%;
-    transition: all 0.3s;
+  &.closed {
+    animation: slideDown 0.5s 1 0s ease-in;
+    animation-fill-mode: forwards;
   }
 
   header {
@@ -136,7 +159,7 @@ footer {
       float: right;
     }
 
-    @include desktop() {
+    @include tablet() {
       display: none;
     }
   }

@@ -1,6 +1,5 @@
-get("sidebar_open").click(() => get("sidebar").addClass("open"));
-get("sidebar_close").click(() => get("sidebar").removeClass("open"));
-
+get("sidebar_open").click(() => get("sidebar").removeClass("closed"));
+get("sidebar_close").click(() => get("sidebar").addClass("closed"));
 
 /**
  * Reduces forecast list to contain only mid-day forecasts.
@@ -14,7 +13,7 @@ const filterForecast = forecast =>
     return f.date.getHours() === 12;
   });
 
-  /*
+/*
 const Dashboard = () => {
   const base = Row({ height: "100%", paddingTop: "0.5em" }).addClass(
     "centered"
