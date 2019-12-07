@@ -38,6 +38,12 @@ $desktop: 1024px;
   }
 }
 
+@mixin NotDesktop {
+  @media (max-width: #{$desktop - 1}) {
+    @content;
+  }
+}
+
 @keyframes slideDown {
   0% {
     transform: translateY(0);
@@ -85,7 +91,7 @@ header {
     margin: auto 0;
     float: right;
 
-    @include tablet() {
+    @include desktop() {
       display: none;
     }
   }
@@ -123,7 +129,7 @@ footer {
 
   @include desktop() {
     display: grid;
-    grid-template-columns: 250px auto;
+    grid-template-columns: 280px auto;
     grid-template-areas: "sidebar content";
   }
 }
@@ -143,20 +149,19 @@ footer {
   animation-fill-mode: forwards;
 
   @include tablet() {
-    height: 100%;
     max-width: 250px;
-    position: unset;
+    right: 0;
   }
 
   @include desktop() {
+    position: relative;
+    max-width: 250px;
     grid-area: sidebar;
   }
 
   &.closed {
-    @include mobile() {
-      animation: slideDown 0.5s 1 0s ease-in;
-      animation-fill-mode: forwards;
-    }
+    animation: slideDown 0.5s 1 0s ease-in;
+    animation-fill-mode: forwards;
   }
 
   header {
@@ -171,7 +176,7 @@ footer {
       float: right;
     }
 
-    @include tablet() {
+    @include desktop() {
       display: none;
     }
   }
@@ -217,6 +222,7 @@ footer {
   @include desktop() {
     grid-area: content;
     display: grid;
+    grid-area: content;
     grid-template-rows: 2fr 1fr;
     grid-template-areas:
       "current"
@@ -246,9 +252,13 @@ footer {
     max-width: 100%;
     max-height: 100%;
     padding: $padding;
-    overflow-y: auto;
     display: flex;
     justify-content: space-between;
+    overflow-y: auto;
+
+    @include mobile() {
+      flex-direction: column;
+    }
 
     @include desktop() {
       grid-area: forecast;
@@ -261,6 +271,10 @@ footer {
 
       .weather-icon {
         order: -1;
+      }
+
+      @include mobile() {
+        width: 100%;
       }
     }
   }
