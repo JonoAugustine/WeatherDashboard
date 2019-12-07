@@ -60,33 +60,27 @@ const query = (type, queryString) =>
 
 /**
  * Make a request to the OpenWeather API for current weather in the given
- * city & country (optional). If the city is found in cache, it's cached data
- * will be returned in the Promise.
+ * city. If the city is found in cache, it's cached data will be returned
+ * in the Promise.
  * @param {String} city
- * @param {String} country
  */
-const weather = (city, country) => {
+const weather = city => {
   return cacheEntry(city).weather
-    ? new Promise(res => {
-        res(cacheEntry(city).weather);
-      })
+    ? new Promise(res => res(cacheEntry(city).weather))
     : // If no cached data is found, make a request and encache
-      query("weather", `q=${city}${country ? "," + country : ""}`).then(
-        r => cacheEntry(city, r).weather
-      );
+      query("weather", `q=${city}`).then(r => cacheEntry(city, r).weather);
 };
 
 /**
  * Make a request to the OpenWeather API for the 5-day forecast in the given
- * city & country (optional). If the city is found in cache, it's cached data
- * will be returned in the Promise.
+ * city. If the city is found in cache, it's cached data will be returned in
+ * the Promise.
  * @param {String} city
- * @param {String} country
  */
-const forecast = (city, country) => {
+const forecast = city => {
   return cacheEntry(city).forecast
     ? new Promise(res => res(cacheEntry(city).forecast))
-    : query("forecast", `q=${city}${country ? "," + country : ""}`).then(
+    : query("forecast", `q=${city}`).then(
         r => cacheEntry(city, null, r).forecast
       );
 };

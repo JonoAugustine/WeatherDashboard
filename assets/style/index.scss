@@ -38,6 +38,28 @@ $desktop: 1024px;
   }
 }
 
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+* {
+  scrollbar-width: none;
+}
+
 html,
 body {
   margin: 0;
@@ -107,33 +129,16 @@ footer {
 }
 
 #sidebar {
-  @keyframes slideDown {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(200%);
-    }
-  }
-
-  @keyframes slideUp {
-    0% {
-      transform: translateY(200%);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-
   position: absolute;
   top: 6%;
+  z-index: 9999999;
 
   width: 90%;
   height: 80%;
   margin: $margin * 2;
 
   border-radius: $radius;
-  background-color: rgba(lighten(color(base), 15%), 0.9);
+  background-color: rgba(lighten(color(base), 15%), 0.95);
   animation: slideUp 0.5s 1 0s ease-in;
   animation-fill-mode: forwards;
 
@@ -204,12 +209,59 @@ footer {
   margin: $margin * 2 0;
   padding: $padding;
   display: flex;
+  flex-direction: column;
 
   border-radius: $radius;
-  background-color: lighten(color(base), 40%);
+  // transform: translateY(200%);
 
   @include desktop() {
     grid-area: content;
     display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-areas:
+      "current"
+      "forecast";
+  }
+
+  &.filled {
+    animation: slideUp 0.5s 1 0s ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  #current {
+    position: relative;
+    width: 100% !important;
+    @include desktop() {
+      grid-area: current;
+    }
+
+    .weather-icon {
+      position: absolute;
+      top: 1%;
+      right: 1%;
+    }
+  }
+
+  #forecast_panel {
+    max-width: 100%;
+    max-height: 100%;
+    padding: $padding;
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+
+    @include desktop() {
+      grid-area: forecast;
+    }
+
+    div.forecast {
+      position: relative;
+      width: 100%;
+      min-width: 125px;
+
+      .weather-icon {
+        order: -1;
+      }
+    }
   }
 }

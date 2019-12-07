@@ -25,20 +25,23 @@
       </a>
     </header>
     <section id="wrapper">
-      <div id="sidebar" class="closed">
+      <div id="sidebar">
         <header>
           <a id="sidebar_close" href="#">
             <h4>X Close</h4>
           </a>
         </header>
         <section class="content">
-          <form action="javascript:search()">
+          <form id="search_form" action="javascript:search()">
             <input type="text" name="search" placeholder="Enter City Name" />
           </form>
           <div id="history"></div>
         </section>
       </div>
-      <div id="weather"></div>
+      <div id="weather">
+        <div id="current"></div>
+        <div id="forecast_panel"></div>
+      </div>
     </section>
     <footer>
       <a href="https://github.com/jonoaugustine">
@@ -51,12 +54,9 @@
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"
     ></script>
-
     <script src="./assets/js/extensions.js"></script>
-    <!--
     <script src="./assets/js/dao.js"></script>
     <script src="./assets/js/components.js"></script>
-  -->
     <script src="./assets/js/index.js"></script>
   </body>
 </html>

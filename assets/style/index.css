@@ -1,4 +1,51 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+@-webkit-keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(200%);
+            transform: translateY(200%);
+  }
+}
+@keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(200%);
+            transform: translateY(200%);
+  }
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(200%);
+            transform: translateY(200%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(200%);
+            transform: translateY(200%);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+* {
+  scrollbar-width: none;
+}
+
 html,
 body {
   margin: 0;
@@ -81,59 +128,16 @@ footer a:hover {
 #sidebar {
   position: absolute;
   top: 6%;
+  z-index: 9999999;
   width: 90%;
   height: 80%;
   margin: 20px;
   border-radius: 15px;
-  background-color: rgba(55, 55, 55, 0.9);
+  background-color: rgba(55, 55, 55, 0.95);
   -webkit-animation: slideUp 0.5s 1 0s ease-in;
           animation: slideUp 0.5s 1 0s ease-in;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slideDown {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-  100% {
-    -webkit-transform: translateY(200%);
-            transform: translateY(200%);
-  }
-}
-
-@keyframes slideDown {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-  100% {
-    -webkit-transform: translateY(200%);
-            transform: translateY(200%);
-  }
-}
-
-@-webkit-keyframes slideUp {
-  0% {
-    -webkit-transform: translateY(200%);
-            transform: translateY(200%);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    -webkit-transform: translateY(200%);
-            transform: translateY(200%);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
 }
 
 @media (min-width: 768px) {
@@ -212,8 +216,11 @@ footer a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border-radius: 15px;
-  background-color: #777777;
 }
 
 @media (min-width: 1024px) {
@@ -221,6 +228,64 @@ footer a:hover {
     grid-area: content;
     display: -ms-grid;
     display: grid;
+    -ms-grid-rows: 2fr 1fr;
+        grid-template-rows: 2fr 1fr;
+        grid-template-areas: "current" "forecast";
   }
+}
+
+#weather.filled {
+  -webkit-animation: slideUp 0.5s 1 0s ease-in;
+          animation: slideUp 0.5s 1 0s ease-in;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+#weather #current {
+  position: relative;
+  width: 100% !important;
+}
+
+@media (min-width: 1024px) {
+  #weather #current {
+    grid-area: current;
+  }
+}
+
+#weather #current .weather-icon {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+
+#weather #forecast_panel {
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+  #weather #forecast_panel {
+    grid-area: forecast;
+  }
+}
+
+#weather #forecast_panel div.forecast {
+  position: relative;
+  width: 100%;
+  min-width: 125px;
+}
+
+#weather #forecast_panel div.forecast .weather-icon {
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
 }
 /*# sourceMappingURL=index.css.map */
