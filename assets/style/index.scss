@@ -125,18 +125,22 @@ footer {
     }
   }
 
-  position: relative;
-  max-width: 250px;
-  height: 100%;
-  margin: $margin * 2 auto;
+  position: absolute;
+  top: 6%;
+
+  width: 90%;
+  height: 80%;
+  margin: $margin * 2;
 
   border-radius: $radius;
-  background-color: rgba(lighten(color(base), 15%), 0.6);
+  background-color: rgba(lighten(color(base), 15%), 0.9);
   animation: slideUp 0.5s 1 0s ease-in;
   animation-fill-mode: forwards;
 
   @include tablet() {
-    margin: $margin * 2 0;
+    height: 100%;
+    max-width: 250px;
+    position: unset;
   }
 
   @include desktop() {
@@ -144,8 +148,10 @@ footer {
   }
 
   &.closed {
-    animation: slideDown 0.5s 1 0s ease-in;
-    animation-fill-mode: forwards;
+    @include mobile() {
+      animation: slideDown 0.5s 1 0s ease-in;
+      animation-fill-mode: forwards;
+    }
   }
 
   header {
@@ -153,6 +159,7 @@ footer {
     margin-bottom: $margin;
     border-radius: $radius $radius 0 0;
     border-color: color(base);
+    background-color: transparent;
 
     a {
       color: darkred;
@@ -188,5 +195,21 @@ footer {
         border-bottom: 1px solid color(base);
       }
     }
+  }
+}
+
+#weather {
+  height: 100%;
+  width: 100%;
+  margin: $margin * 2 0;
+  padding: $padding;
+  display: flex;
+
+  border-radius: $radius;
+  background-color: lighten(color(base), 40%);
+
+  @include desktop() {
+    grid-area: content;
+    display: grid;
   }
 }
