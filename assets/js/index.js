@@ -1,3 +1,7 @@
+get("sidebar_open").click(() => get("sidebar").addClass("open"));
+get("sidebar_close").click(() => get("sidebar").removeClass("open"));
+
+
 /**
  * Reduces forecast list to contain only mid-day forecasts.
  * Also adds a new property ``date`` to the each forcast as
@@ -10,6 +14,7 @@ const filterForecast = forecast =>
     return f.date.getHours() === 12;
   });
 
+  /*
 const Dashboard = () => {
   const base = Row({ height: "100%", paddingTop: "0.5em" }).addClass(
     "centered"
@@ -54,3 +59,4 @@ const Dashboard = () => {
 
 const dash = Dashboard();
 show(dash);
+*/

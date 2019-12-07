@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+$colors: (
+  primary: rgba(40, 150, 90, 1),
+  accent: rgba(0, 141, 213, 1),
+  primary-dark: rgba(42, 96, 65, 1),
+  base: rgba(17, 17, 17, 1),
+  text-: rgba(234, 235, 237, 1)
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$radius: 15px;
+$margin: 10px;
+$padding: 10px;
+
+$mobile: 425px;
+$tablet: 768px;
+$desktop: 1024px;
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  color: color(text-);
+  background-color: color(base);
+}
+
+header {
+  width: 100%;
+  padding: $padding;
+  text-align: center;
+  min-height: 30px;
+  background-color: lighten(color(base), 8%);
+  border-bottom: 2px solid color(accent);
+
+  * {
+    display: inline;
+  }
+
+  svg {
+    margin: auto 0;
+    float: right;
+
+    @include desktop() {
+      display: none;
+    }
+  }
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  text-align: center;
+  padding: $padding;
+
+  border-top: 1px solid slategray;
+
+  a {
+    color: color(text-);
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @include desktop() {
+      display: none;
+    }
+  }
+}
+
+#wrapper {
+  height: 80%;
+  max-height: 80%;
+}
+
+#sidebar {
+  width: 0;
+  max-width: 250px;
+  height: 100%;
+  margin: $margin * 2 auto;
+  border-radius: $radius;
+  background-color: rgba(lighten(color(base), 15%), 0.6);
+  transition: all 0.3s;
+
+  &.open {
+    width: 100%;
+    transition: all 0.3s;
+  }
+
+  header {
+    padding: $padding / 2 $padding;
+    margin-bottom: $margin;
+    border-radius: $radius $radius 0 0;
+    border-color: color(base);
+
+    a {
+      color: darkred;
+      float: right;
+    }
+
+    @include desktop() {
+      display: none;
+    }
+  }
+
+  .content {
+    padding: $padding;
+    text-align: center;
+
+    input {
+      width: 100%;
+      max-width: 200px;
+      padding: $padding;
+      color: white;
+      background-color: transparent;
+      border: 1px solid color(accent);
+    }
+
+    #history {
+      width: 100%;
+      margin: $margin auto;
+      padding: $padding 0;
+      border-top: 2px solid color(accent);
+
+      .search-record {
+        width: 100%;
+        border-bottom: 1px solid color(base);
+      }
+    }
+  }
+}

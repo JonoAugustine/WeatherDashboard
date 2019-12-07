@@ -5,20 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>The Weather</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.2/dist/semantic.min.css"
+    />
     <link rel="stylesheet" type="text/css" href="./assets/style/index.css" />
   </head>
   <body>
-    <div id="wrapper">
-      <header>
-        <h1>Weather Dashbord</h1>
-      </header>
-      <div id="root"></div>
-      <footer>
-        <a href="https://github.com/jonoaugustine">
-          <h3>Made By Jono Augustine</h3>
-        </a>
-      </footer>
-    </div>
+    <header>
+      <h1>Weather Dashbord</h1>
+      <a id="sidebar_open" href="#">
+        <svg width="30" height="30">
+          <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+          <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+          <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+        </svg>
+      </a>
+    </header>
+    <section id="wrapper">
+      <div id="sidebar" class="open">
+        <header>
+          <a id="sidebar_close" href="#">
+            <h4>X Close</h4>
+          </a>
+        </header>
+        <section class="content">
+          <form action="javascript:search()">
+            <input type="text" name="search" placeholder="Enter City Name" />
+          </form>
+          <div id="history"></div>
+        </section>
+      </div>
+      <div id="weather"></div>
+    </section>
+    <footer>
+      <a href="https://github.com/jonoaugustine">
+        <h4>Made By Jono Augustine</h4>
+      </a>
+    </footer>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -27,8 +53,10 @@
     ></script>
 
     <script src="./assets/js/extensions.js"></script>
+    <!--
     <script src="./assets/js/dao.js"></script>
     <script src="./assets/js/components.js"></script>
+  -->
     <script src="./assets/js/index.js"></script>
   </body>
 </html>
