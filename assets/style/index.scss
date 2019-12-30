@@ -38,12 +38,6 @@ $desktop: 1024px;
   }
 }
 
-@mixin NotDesktop {
-  @media (max-width: #{$desktop - 1}) {
-    @content;
-  }
-}
-
 @keyframes slideDown {
   0% {
     transform: translateY(0);
@@ -145,6 +139,7 @@ footer {
 
   border-radius: $radius;
   background-color: rgba(lighten(color(base), 15%), 0.95);
+  box-shadow: 0 0.5rem 1rem rgba(color(accent), 0.1);
   animation: slideUp 0.5s 1 0s ease-in;
   animation-fill-mode: forwards;
 
@@ -200,9 +195,23 @@ footer {
       padding: $padding 0;
       border-top: 2px solid color(accent);
 
+      * {
+        transition: all 0.3s;
+      }
+
       .search-record {
-        width: 100%;
-        border-bottom: 1px solid color(base);
+        margin: 0 auto;
+        padding: $padding / 2;
+        font-size: medium;
+        box-shadow: 0 0.1rem 0.3rem color(base);
+
+        &:hover {
+          box-shadow: 0 0.1rem 0.4rem color(primary-dark);
+        }
+
+        &:active {
+          box-shadow: 0 0.1rem 0.4rem color(primary);
+        }
       }
     }
   }
@@ -217,7 +226,6 @@ footer {
   flex-direction: column;
 
   border-radius: $radius;
-  // transform: translateY(200%);
 
   @include desktop() {
     grid-area: content;
@@ -237,6 +245,10 @@ footer {
   #current {
     position: relative;
     width: 100% !important;
+    padding: 1rem;
+    border-radius: $radius;
+    box-shadow: 0.2rem 0.4rem 0.5rem color(primary-dark);
+
     @include desktop() {
       grid-area: current;
     }
@@ -253,6 +265,7 @@ footer {
     max-height: 100%;
     padding: $padding;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     overflow-y: auto;
 
@@ -267,7 +280,11 @@ footer {
     div.forecast {
       position: relative;
       width: 100%;
-      min-width: 125px;
+      min-width: 110px;
+      margin: 0.5rem;
+      padding: 1rem;
+      border-radius: $radius;
+      box-shadow: 0 0.3rem 0.4rem color(accent);
 
       .weather-icon {
         order: -1;

@@ -1,9 +1,7 @@
 # WeatherDashboard
 
-https://jonoaugustine.github.io/WeatherDashboard/.
+https://jonoaugustine.github.io/WeatherDashboard/
 
----
+## Known bugs
 
-TODO:
-    Better caching
-    
+- Sidebar will not reappear after hiding on small screen and expanding the screen.

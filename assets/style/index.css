@@ -134,6 +134,8 @@ footer a:hover {
   margin: 20px;
   border-radius: 15px;
   background-color: rgba(55, 55, 55, 0.95);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 141, 213, 0.1);
+          box-shadow: 0 0.5rem 1rem rgba(0, 141, 213, 0.1);
   -webkit-animation: slideUp 0.5s 1 0s ease-in;
           animation: slideUp 0.5s 1 0s ease-in;
   -webkit-animation-fill-mode: forwards;
@@ -202,9 +204,27 @@ footer a:hover {
   border-top: 2px solid #008dd5;
 }
 
+#sidebar .content #history * {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
 #sidebar .content #history .search-record {
-  width: 100%;
-  border-bottom: 1px solid #111111;
+  margin: 0 auto;
+  padding: 5px;
+  font-size: medium;
+  -webkit-box-shadow: 0 0.1rem 0.3rem #111111;
+          box-shadow: 0 0.1rem 0.3rem #111111;
+}
+
+#sidebar .content #history .search-record:hover {
+  -webkit-box-shadow: 0 0.1rem 0.4rem #2a6041;
+          box-shadow: 0 0.1rem 0.4rem #2a6041;
+}
+
+#sidebar .content #history .search-record:active {
+  -webkit-box-shadow: 0 0.1rem 0.4rem #28965a;
+          box-shadow: 0 0.1rem 0.4rem #28965a;
 }
 
 #weather {
@@ -244,6 +264,10 @@ footer a:hover {
 #weather #current {
   position: relative;
   width: 100% !important;
+  padding: 1rem;
+  border-radius: 15px;
+  -webkit-box-shadow: 0.2rem 0.4rem 0.5rem #2a6041;
+          box-shadow: 0.2rem 0.4rem 0.5rem #2a6041;
 }
 
 @media (min-width: 1024px) {
@@ -265,6 +289,9 @@ footer a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -289,7 +316,12 @@ footer a:hover {
 #weather #forecast_panel div.forecast {
   position: relative;
   width: 100%;
-  min-width: 125px;
+  min-width: 110px;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 0.3rem 0.4rem #008dd5;
+          box-shadow: 0 0.3rem 0.4rem #008dd5;
 }
 
 #weather #forecast_panel div.forecast .weather-icon {
